@@ -4,7 +4,7 @@ inputs:
   chat-id:
     description: group or single chat id(you can get it on the url of the chat)
     required: true
-  token-bot:
+  bot-token:
     description: bot token created by BotFather on Telegram
     required: true
   message_thread_id:
