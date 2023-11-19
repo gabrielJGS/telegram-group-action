@@ -9,28 +9,31 @@ on:
 
 jobs:
   test-action:
-    - name: GitHub Actions Test
+    name: GitHub Actions Test
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20.x'
-      - run: npm ci
-      - run: npm run build
+    - name: Checkout
+      id: checkout
+      uses: actions/checkout@v4
 
-    - name: send test message
-      uses: ./
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20.x'
+
+    - run: |
+        npm ci
+        npm run build
+
+    - name: SendMessage
+      uses: ./ # Replace with the appropriate action you intend to use
       with:
         token-bot: ${{ secrets.TELEGRAM_TOKEN }}
         chat-id: ${{ secrets.TELEGRAM_CHAT }}
         message_thread_id: ${{ secrets.TELEGRAM_THREAD }}
         text: |
-          The ${{ github.event_name }} event triggered second step.
-          show the github variable ref: ${{ github.ref }}
-          show the github variable commit: ${{ github.sha }}
-          show the github variable ref: {{ commit.ref }}
-          show the github variable commit: {{ commit.sha }}
+          The ${{ github.event_name }} event triggered the second step.
+          Show the GitHub variable ref: ${{ github.ref }}
+          Show the GitHub variable commit: ${{ github.sha }}
           Commit Message: ${{ github.event.head_commit.message }}
