@@ -28,9 +28,9 @@ jobs:
     - name: SendMessage
       uses: ./ # Replace with the appropriate action you intend to use
       with:
-        token-bot: ${{ secrets.TELEGRAM_TOKEN }}
+        bot-token: ${{ secrets.TELEGRAM_TOKEN }}
         chat-id: ${{ secrets.TELEGRAM_CHAT }}
-        message_thread_id: ${{ secrets.TELEGRAM_THREAD }}
+        message_thread_id: ${{ secrets.MESSAGE_THREAD_ID }}
         text: |
           The ${{ github.event_name }} event triggered the second step.
           Show the GitHub variable ref: ${{ github.ref }}
