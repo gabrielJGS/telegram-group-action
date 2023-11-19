@@ -7,7 +7,7 @@ async function run(): Promise<void> {
     const botToken: string = core.getInput("bot-token");
     const chatId: number = +core.getInput("chat-id");
     const messageThread: number | null = +core.getInput("message_thread_id");
-    const text: string = core.getInput("text");
+    const text: string = core.getInput("repo.namespace");
 
     if (!botToken || botToken.trim() === "" || !chatId) {
       throw new Error(

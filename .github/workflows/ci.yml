@@ -31,8 +31,4 @@ jobs:
         bot-token: ${{ secrets.TELEGRAM_TOKEN }}
         chat-id: ${{ secrets.TELEGRAM_CHAT }}
         message_thread_id: ${{ secrets.MESSAGE_THREAD_ID }}
-        text: |
-          The ${{ github.event_name }} event triggered the second step.
-          Show the GitHub variable ref: ${{ github.ref }}
-          Show the GitHub variable commit: ${{ github.sha }}
-          Commit Message: ${{ github.event.head_commit.message }}
+        text: 'test'
