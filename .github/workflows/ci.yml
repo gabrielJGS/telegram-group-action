@@ -16,9 +16,10 @@ jobs:
     - name: send test message
       uses: ./
       with:
-        to: ${{ secrets.TELEGRAM_TO }}
-        token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: |
+        token-bot: ${{ secrets.TELEGRAM_TOKEN }}
+        chat-id: ${{ secrets.TELEGRAM_CHAT }}
+        message_thread_id: ${{ secrets.TELEGRAM_THREAD }}
+        text: |
           The ${{ github.event_name }} event triggered second step.
           show the github variable ref: ${{ github.ref }}
           show the github variable commit: ${{ github.sha }}
