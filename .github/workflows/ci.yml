@@ -13,6 +13,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+
     - name: send test message
       uses: ./
       with:
