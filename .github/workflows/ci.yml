@@ -14,8 +14,8 @@ jobs:
 
     steps:
     - name: Checkout
-        id: checkout
-        uses: actions/checkout@v4
+      id: checkout
+      uses: actions/checkout@v4
 
     - name: send test message
       uses: ./
