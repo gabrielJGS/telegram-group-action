@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "do": "DEBUG=script:* node -r esbuild-register -r tsconfig-paths/register",
-    "build": "tsc",
+    "prebuild": "if exist build (rmdir /Q /S build)",
+    "build": "tsc --generateTrace traceOutputDir",
     "format": "prettier --write **/*.ts",
     "lint": "eslint src/**/*.ts",
     "prepare": "esbuild src/index.ts --bundle --minify --platform=node --target=node20 --outfile=dist/index.js",
