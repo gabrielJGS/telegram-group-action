@@ -1,0 +1,16 @@
+name: 'Telegram Group Chat Action'
+description: 'Inform the telegram group chat of new actions in repository'
+inputs:
+  who-to-greet:  # id of input
+    description: 'Output github actions to telegram group chat'
+    required: true
+    default: 'World'
+  chat-id:
+    description: group or single chat id(you can get it on the url of the chat)
+    required: true
+  token-bot:
+    description: bot token created by BotFather on Telegram
+    required: true
+runs:
+  using: 'node20'
+  main: 'dist/index.js'

@@ -1,0 +1,27 @@
+name: Continuous Integration
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - "releases/*"
+
+jobs:
+  test-action:
+    name: GitHub Actions Test
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: send test message
+      uses: ./
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: |
+          The ${{ github.event_name }} event triggered second step.
+          show the github variable ref: ${{ github.ref }}
+          show the github variable commit: ${{ github.sha }}
+          show the github variable ref: {{ commit.ref }}
+          show the github variable commit: {{ commit.sha }}
+          Commit Message: ${{ github.event.head_commit.message }}
