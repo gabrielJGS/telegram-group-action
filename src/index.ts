@@ -8,6 +8,11 @@ async function run(): Promise<void> {
     const chatId: number = +core.getInput("chat-id");
     const messageThread: number | null = +core.getInput("message_thread_id");
     const text: string = core.getInput("text");
+    const escapedMsg = text
+    .replace("_", "\\_")
+    .replace("*", "\\*")
+    .replace("[", "\\[")
+    .replace("`", "\\`");
 
     if (!botToken || botToken.trim() === "" || !chatId) {
       throw new Error(
@@ -16,7 +21,7 @@ async function run(): Promise<void> {
     }
 
     const tel = new TelegramApi(botToken);
-    const telBody: SendMessageParams = { chat_id: chatId, text };
+    const telBody: SendMessageParams = { chat_id: chatId, text: escapedMsg };
     if (messageThread) telBody.message_thread_id = messageThread;
     await tel.sendMessage(telBody);
   } catch (error) {
