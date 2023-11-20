@@ -12,6 +12,7 @@ async function run(): Promise<void> {
     .replace("_", "\\_")
     .replace("*", "\\*")
     .replace("[", "\\[")
+    .replace("|", "\\|")
     .replace("`", "\\`");
 
     if (!botToken || botToken.trim() === "" || !chatId) {
