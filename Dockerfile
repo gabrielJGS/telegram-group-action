@@ -14,5 +14,5 @@ COPY package.json package-lock.json ./
 RUN npm install -g esbuild
 RUN npm ci --omit=dev
 #EXPOSE 3000
-CMD "pwd && ls"
+CMD "ls"
 #CMD ["node", "./dist/index.js"]
