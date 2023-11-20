@@ -10,11 +10,22 @@ async function run(): Promise<void> {
     const chatId: number = +core.getInput("chat-id");
     const messageThread: number | null = +core.getInput("message_thread_id");
     const text: string = core.getInput("text");
-    const message = `${text}
+    let message = `${text}
     <b>on:</b> <a href='${ctx.payload.repository.html_url}'>${ctx.payload.repository.full_name}</a>
     <b>by:</b> <a href='${ctx.payload.sender.html_url}'>${ctx.payload.sender.login}</a>
     <b>${ctx.eventName}:</b> ${ctx.ref}
-    <a href='${ctx.payload.head_commit.url}'>${ctx.payload.head_commit.message}</a>`;
+    `;
+    if (ctx.payload.head_commit) {
+      message += `<a href='${ctx.payload.head_commit.url}'>${ctx.payload.head_commit.message}</a>`;
+    } else {
+      if (ctx.payload.pull_request) {
+        message += `<b>branch: </b>${ctx.payload.pull_request.head.label}
+        <a href='${ctx.payload.pull_request._links.html.href}'>${ctx.payload.pull_request.title}</a>`;
+      } else {
+        core.error("Isn't a commit or pull request, dumping data:");
+        core.info(JSON.stringify(ctx));
+      }
+    }
 
     if (!botToken || botToken.trim() === "" || !chatId) {
       throw new Error(
