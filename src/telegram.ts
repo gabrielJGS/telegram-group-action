@@ -28,7 +28,7 @@ export class TelegramApi {
     const url = `${baseUrl}/sendMessage`;
     try {
       await this.axios.post(url, {
-        parse_mode: "MarkdownV2",
+        parse_mode: "html",
         ...body,
       });
     } catch (e: AxiosError | any) {

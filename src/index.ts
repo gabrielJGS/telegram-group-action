@@ -9,9 +9,9 @@ async function run(): Promise<void> {
     const messageThread: number | null = +core.getInput("message_thread_id");
     const text: string = core.getInput("text");
     const message = `${text}
-    on: ${context.repo.repo} by:${context.actor}
-    ${context.eventName}: ${context.ref}
-    ${context.payload.head_commit.message}`
+    <b>on:</b> ${context.repo.repo} <b>by:</b>${context.actor}
+    <b>${context.eventName}:</b> ${context.ref}
+    <a href='${context.payload.head_commit.url}'>${context.payload.head_commit.message}</a>`
     if (!botToken || botToken.trim() === "" || !chatId) {
       throw new Error(
         "bot-token and chat-id are required in github project secrets",
