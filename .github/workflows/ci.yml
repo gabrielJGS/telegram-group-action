@@ -31,10 +31,10 @@ jobs:
         bot-token: ${{ secrets.TELEGRAM_TOKEN }}
         chat-id: ${{ secrets.TELEGRAM_CHAT }}
         message_thread_id: ${{ secrets.MESSAGE_THREAD_ID }}
-        text: '
+        text: |
           The ${{ github.event_name }} event triggered second step. 
           show the github variable ref: ${{ github.ref }} 
           show the github variable commit: ${{ github.sha }} 
           show the github variable ref: {{ commit.ref }} 
           show the github variable commit: {{ commit.sha }} 
-          Commit Message: ${{ github.event.head_commit.message }}'
+          Commit Message: ${{ github.event.head_commit.message }}
