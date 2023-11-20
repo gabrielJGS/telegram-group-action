@@ -12,6 +12,8 @@ async function run(): Promise<void> {
     .replace("_", "\\_")
     .replace("*", "\\*")
     .replace("[", "\\[")
+    .replace("]", "\\]")
+    .replace(".", "\\.")
     .replace("|", "\\|")
     .replace("`", "\\`");
 
