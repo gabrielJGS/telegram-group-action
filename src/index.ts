@@ -8,15 +8,11 @@ async function run(): Promise<void> {
     const chatId: number = +core.getInput("chat-id");
     const messageThread: number | null = +core.getInput("message_thread_id");
     const text: string = core.getInput("text");
-    core.info(JSON.stringify(context.action));
-    core.info(JSON.stringify(context.actor));
-    core.info(JSON.stringify(context.eventName));
-    core.info(JSON.stringify(context.issue));
-    core.info(JSON.stringify(context.job));
-    core.info(JSON.stringify(context.ref));
-    core.info(JSON.stringify(context.repo));
     const message = `${text}\n
-    ${context.repo.repo}`
+    ${context.repo.repo}\n
+    ${context.payload.head_commit.message}
+    ${context.eventName}: ${context.ref}\n
+    ${context.actor}`
     if (!botToken || botToken.trim() === "" || !chatId) {
       throw new Error(
         "bot-token and chat-id are required in github project secrets",
@@ -24,7 +20,7 @@ async function run(): Promise<void> {
     }
 
     const tel = new TelegramApi(botToken);
-    const telBody: SendMessageParams = { chat_id: chatId, text: tel.escapeTelegramSpecialChars(text) };
+    const telBody: SendMessageParams = { chat_id: chatId, text: tel.escapeTelegramSpecialChars(message) };
     if (messageThread) telBody.message_thread_id = messageThread;
     await tel.sendMessage(telBody);
   } catch (error) {
