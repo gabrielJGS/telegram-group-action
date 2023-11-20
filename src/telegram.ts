@@ -36,4 +36,18 @@ export class TelegramApi {
       throw new Error(e.response.data ?? e.request);
     }
   }
+
+  escapeTelegramSpecialChars(message: string) {
+    // Escape characters that need special treatment in Telegram
+    const escapeChars = ['_', '*', '[', ']', '(', ')', '~', '`', '>', '#', '+', '-', '=', '|', '{', '}', '.', '!'];
+    escapeChars.forEach(char => {
+      const regex = new RegExp(`\\${char}`, 'g');
+      message = message.replace(regex, `\\${char}`);
+    });
+    // Optionally HTML-escape characters
+    message = message.replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+    return message;
+  }
 }
