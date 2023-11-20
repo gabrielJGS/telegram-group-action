@@ -10,6 +10,7 @@ async function run(): Promise<void> {
     const chatId: number = +core.getInput("chat-id");
     const messageThread: number | null = +core.getInput("message_thread_id");
     const text: string = core.getInput("text");
+    core.info(JSON.stringify(ctx));
     const message = `${text}
     <b>on:</b> <a href='${ctx.payload.repository.html_url}'>${ctx.payload.repository.full_name}</a>
     <b>by:</b> <a href='${ctx.payload.sender.html_url}'>${ctx.payload.sender.login}</a>
