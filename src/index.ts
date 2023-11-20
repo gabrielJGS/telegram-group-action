@@ -12,10 +12,11 @@ async function run(): Promise<void> {
     const messageThread: number | null = +core.getInput("message_thread_id");
     const text: string = core.getInput("text");
     const message = `${text}
-    <b>on:</b> <a href='${ctx.payload.repository.html_url}'>${ctx.payload.repository.full_name}
-    <b>by:</b><a href='${ctx.payload.sender.html_url}'>${ctx.payload.sender.login}</a>
+    <b>on:</b> <a href='${ctx.payload.repository.html_url}'>${ctx.payload.repository.full_name}</a>
+    <b>by:</b> <a href='${ctx.payload.sender.html_url}'>${ctx.payload.sender.login}</a>
     <b>${ctx.eventName}:</b> ${ctx.ref}
-    <a href='${ctx.payload.head_commit.url}'>${ctx.payload.head_commit.message}</a>`
+    <a href='${ctx.payload.head_commit.url}'>${ctx.payload.head_commit.message}</a>`;
+
     if (!botToken || botToken.trim() === "" || !chatId) {
       throw new Error(
         "bot-token and chat-id are required in github project secrets",
