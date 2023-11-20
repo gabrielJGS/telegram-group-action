@@ -19,7 +19,7 @@ async function run(): Promise<void> {
     }
 
     const tel = new TelegramApi(botToken);
-    const telBody: SendMessageParams = { chat_id: chatId, text: tel.escapeTelegramSpecialChars(message) };
+    const telBody: SendMessageParams = { chat_id: chatId, text: message };
     if (messageThread) telBody.message_thread_id = messageThread;
     await tel.sendMessage(telBody);
   } catch (error) {
