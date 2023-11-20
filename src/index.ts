@@ -1,5 +1,5 @@
 import * as core from "@actions/core";
-// import { context } from '@actions/github';
+import { context } from '@actions/github';
 import { SendMessageParams, TelegramApi } from "./telegram";
 
 async function run(): Promise<void> {
@@ -8,6 +8,7 @@ async function run(): Promise<void> {
     const chatId: number = +core.getInput("chat-id");
     const messageThread: number | null = +core.getInput("message_thread_id");
     const text: string = core.getInput("text");
+    core.info(JSON.stringify(context));
     const escapedMsg = text
     .replace("_", "\\_")
     .replace("*", "\\*")
