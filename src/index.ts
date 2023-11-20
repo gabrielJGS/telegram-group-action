@@ -4,8 +4,7 @@ import { context } from '@actions/github';
 import { SendMessageParams, TelegramApi } from "./telegram";
 
 async function run(): Promise<void> {
-  const ct: unknown = context; // Assign context as unknown
-  const ctx: Context = ct as Context;
+  const ctx: Context = context as unknown as Context;
   try {
     const botToken: string = core.getInput("bot-token");
     const chatId: number = +core.getInput("chat-id");
